@@ -1,34 +1,27 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class SimulationManager : MonoBehaviour
 {
-    public float timer = 0f;
-    public bool isRunning = true;
+    public float simulationTime = 60f;
+    private float currentTime;
 
-    public Text timerText;
+    public TMP_Text timerText;
+
+    void Start()
+    {
+        currentTime = simulationTime;
+    }
 
     void Update()
     {
-        if (isRunning)
+        Debug.Log("NEW SCRIPT RUNNING");
+
+        currentTime -= Time.deltaTime;
+
+        if (timerText != null)
         {
-            timer += Time.deltaTime;
-            timerText.text = "Time: " + timer.ToString("F2");
+            timerText.text = "Time: " + Mathf.Ceil(currentTime);
         }
-    }
-
-    public void ResetTimer()
-    {
-        timer = 0f;
-    }
-
-    public void StopTimer()
-    {
-        isRunning = false;
-    }
-
-    public void StartTimer()
-    {
-        isRunning = true;
     }
 }
